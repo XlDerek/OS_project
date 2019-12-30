@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include <stdio.h>
 #include <sys/socket.h>
 #include <fcntl.h>
@@ -217,4 +218,6 @@ int main(int argc, char * argv[])
         printf("hhhh");
 return 0;
 }
+=======
+>>>>>>> 1b16ac19fd69b6d61096c27e06fbe408b51f3aec
 

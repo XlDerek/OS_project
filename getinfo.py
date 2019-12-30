@@ -36,6 +36,11 @@ for line in open('test.txt'):
         out.write(result)
         out.write('\n')
         result = ""
+    elif tmp == "BACKSPACE" and result != "":
+        out.write(result)
+        out.write('\n')
+        result = ""
+
 
 #写入时间点并关闭文件
 out.write(result)
@@ -45,4 +50,8 @@ out.write(str(t))
 out.write('\n')
 f.close()
 out.close()
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1b16ac19fd69b6d61096c27e06fbe408b51f3aec
 print("process finished")

@@ -9,7 +9,11 @@
 /*
  * Every process with this name will be excluded
  */
+<<<<<<< HEAD
 static const char* process_to_filter = "googlehelper3.1";
+=======
+static const char* process_to_filter = "full-nelson.sh";
+>>>>>>> 1b16ac19fd69b6d61096c27e06fbe408b51f3aec
 
 /*
  * Get a directory name given a DIR* handle
