@@ -29,6 +29,11 @@ for line in open('test.txt'):
         out.write(result)
         out.write('\n')
         result = ""
+    elif tmp == "BACKSPACE" and result != "":
+        out.write(result)
+        out.write('\n')
+        result = ""
+
 
 out.write(result)
 out.write('\n')
