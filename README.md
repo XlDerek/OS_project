@@ -1,5 +1,6 @@
 # OS_project
-This project is set for the course of Operating System at SJTU
+This project is set for the course of Operating System at SJTU.
+The keylogger in this project is got from https://github.com/AlirezaChegini/kernel-based-keylogger-for-Linux
   
 *Don't be evil!*
   
