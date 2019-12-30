@@ -56,7 +56,7 @@ long* find_pid_by_name( char* pidName)
        sscanf(buffer, "%*s %s", name);
        if (strcmp(name, pidName) == 0)
        {
-           printf("name:%s\n",name);
+         //  printf("name:%s\n",name);
            pidList=realloc( pidList, sizeof(long) * (i+2));
            pidList[i++]=strtol(next->d_name, NULL, 0);
            break;
@@ -66,17 +66,20 @@ long* find_pid_by_name( char* pidName)
    if (pidList)
    {
        pidList[i]=0;
-       printf("pid:%ld\n",pidList[0]);
+      // printf("pid:%ld\n",pidList[0]);
 
        return pidList[0];
    }
    return NULL;
 }
 
-void main()
+
+int main()
 {
    int pid;
    char cmd[20]={0};
    pid = find_pid_by_name( "firefox");
-   printf("%s : %d \n","firefox",pid);
+   //printf("%s : %d \n","firefox",pid);
+   printf("%d\n",pid);
+   return 0;
 }
